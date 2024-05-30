@@ -16,7 +16,9 @@ COPY . .
 RUN chmod -R 777 /app
 
 # 为脚本设置可执行权限
-RUN chmod +x start.sh
+RUN chmod +x start.sh && \
+    chmod +x begin.sh
+
 
 # 安装依赖包及清理缓存
 RUN apt-get update && \
