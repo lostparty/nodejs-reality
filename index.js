@@ -7,7 +7,7 @@ const WORK_DIR = process.env.WORK_DIR;
 const subtxt = `${WORK_DIR}/url.txt`;
 const HTTP_PORT = process.env.HTTP_PORT || 3000;
 
-// Run start.sh
+// 运行 start.sh
 fs.chmod(`${WORK_DIR}/start.sh`, 0o777, (err) => {
   if (err) {
       console.error(`Failed to set permissions for start.sh: ${err}`);
@@ -28,13 +28,13 @@ fs.chmod(`${WORK_DIR}/start.sh`, 0o777, (err) => {
   });
 });
 
-// Create HTTP server
+// 创建 HTTP 服务器
 const server = http.createServer((req, res) => {
     if (req.url === '/') {
         res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
         res.end('Hello world!');
     }
-    // Get-sub
+    // 获取 sub 路径
     if (req.url === '/sub') {
         fs.readFile(subtxt, 'utf8', (err, data) => {
             if (err) {
