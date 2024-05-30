@@ -13,6 +13,10 @@ cp /app/index.js "$WORK_DIR"
 cp /app/package.json "$WORK_DIR"
 cp /app/start.sh "$WORK_DIR"
 
+#shouquan
+chmod +x start.sh
+chmod +x index.js
+
 # 安装依赖并启动服务
 npm install
 node index.js
