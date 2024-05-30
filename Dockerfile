@@ -12,6 +12,9 @@ USER root
 # 复制本地文件到容器
 COPY . .
 
+# 设置工作目录权限 
+RUN chmod -R 777 /app
+
 # 为脚本设置可执行权限
 RUN chmod +x start.sh
 
