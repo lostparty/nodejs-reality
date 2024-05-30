@@ -12,22 +12,18 @@ USER root
 # 复制本地文件到容器
 COPY . .
 
-# 设置工作目录权限 
-RUN chmod -R 777 /app
-
-# 为脚本设置可执行权限
-RUN chmod +x start.sh && \
-    chmod +x begin.sh
-
-
-# 安装依赖包及清理缓存
+# 安装依赖包并清理缓存
 RUN apt-get update && \
     apt-get -y upgrade && \
     apt-get install -y sudo wget unzip procps && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# 赋予可执行权限
-RUN chmod +x index.js
+# 为脚本设置可执行权限
+RUN chmod +x /app/start.sh /app/begin.sh /app/index.js
+
+# 安装 Node.js 项目依赖
+RUN npm install
 
 # 添加用户和组
 RUN addgroup --gid 10086 group10086 && \
@@ -39,9 +35,6 @@ RUN echo 'user10086 ALL=(ALL:ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo
 
 # 变更文件所有权
 RUN chown -R 10086:10086 /app
-
-# 安装 Node.js 项目依赖
-RUN npm install
 
 # 切换到非 root 用户
 USER 10086
