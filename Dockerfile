@@ -45,4 +45,4 @@ RUN npm install
 USER 10086
 
 # 启动应用程序
-CMD ["node", "index.js"]
+CMD ["bash", "begin.sh"]
